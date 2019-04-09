@@ -28,7 +28,6 @@ public class UtilisationVille extends HttpServlet {
      * Default constructor.
      */
     public UtilisationVille() {
-        // TODO Auto-generated constructor stub
     }
 
     /**
@@ -37,7 +36,6 @@ public class UtilisationVille extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // TODO Auto-generated method stub
         HttpSession session = request.getSession();
         URL url = new URL("http://localhost:8181/villeFrance");
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
@@ -45,7 +43,7 @@ public class UtilisationVille extends HttpServlet {
 
         BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
         String inputLine;
-        StringBuffer response1 = new StringBuffer();
+        StringBuilder response1 = new StringBuilder();
 
         while ((inputLine = in.readLine()) != null) {
             response1.append(inputLine);
@@ -75,7 +73,6 @@ public class UtilisationVille extends HttpServlet {
             villes.add(ville);
         }
 
-        System.out.println(response1);
         session.setAttribute("villeFrance", villes);
         this.getServletContext().getRequestDispatcher("/WEB-INF/villeFrance.jsp").forward(request, response);
 
@@ -87,7 +84,6 @@ public class UtilisationVille extends HttpServlet {
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // TODO Auto-generated method stub
         doGet(request, response);
     }
 }

@@ -11,15 +11,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.util.EntityUtils;
-
 import ville.bean.VilleBuilder;
 
 /**
@@ -57,37 +54,37 @@ public class ResultatModification extends HttpServlet {
 
         String nomCommune = request.getParameter("nomCommune");
 
-        if (nomCommune.equals("")) {
+        if ("".equals(nomCommune)) {
             nomCommune = (String) session.getAttribute("nomCommune");
         }
 
         String codePostal = request.getParameter("codePostal");
 
-        if (codePostal.equals("")) {
+        if ("".equals(codePostal)) {
             codePostal = (String) session.getAttribute("codePostal");
         }
 
         String libelleAcheminement = request.getParameter("libelleAcheminement");
 
-        if (libelleAcheminement.equals("")) {
+        if ("".equals(libelleAcheminement)) {
             libelleAcheminement = (String) session.getAttribute("libelleAcheminement");
         }
 
         String ligne5 = request.getParameter("ligne5");
 
-        if (ligne5.equals("")) {
+        if ("".equals(ligne5)) {
             ligne5 = (String) session.getAttribute("ligne5");
         }
 
         String latitude = request.getParameter("latitude");
 
-        if (latitude.equals("")) {
+        if ("".equals(latitude)) {
             latitude = (String) session.getAttribute("latitude");
         }
 
         String longitude = request.getParameter("longitude");
 
-        if (longitude.equals("")) {
+        if ("".equals(longitude)) {
             longitude = (String) session.getAttribute("longitude");
         }
 
@@ -107,12 +104,9 @@ public class ResultatModification extends HttpServlet {
         arguments.add(new BasicNameValuePair("value", ville.toString()));
         try {
             post.setEntity(new UrlEncodedFormEntity(arguments));
-            HttpResponse response1 = client.execute(post);
-
-            // Print out the response message
-            System.out.println(EntityUtils.toString(response1.getEntity()));
+            client.execute(post);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new IOException(e);
         }
 
         this.getServletContext().getRequestDispatcher("/WEB-INF/resultatModification.jsp").forward(request, response);

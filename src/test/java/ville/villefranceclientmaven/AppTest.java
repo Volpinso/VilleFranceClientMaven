@@ -1,4 +1,4 @@
-package ville.VilleFranceClientMaven;
+package ville.villefranceclientmaven;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

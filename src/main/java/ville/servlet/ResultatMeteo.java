@@ -85,7 +85,7 @@ public class ResultatMeteo extends HttpServlet {
 
         BufferedReader inMeteo = new BufferedReader(new InputStreamReader(conMeteo.getInputStream()));
         String inputLineMeteo;
-        StringBuffer responseMeteo = new StringBuffer();
+        StringBuilder responseMeteo = new StringBuilder();
 
         while ((inputLineMeteo = inMeteo.readLine()) != null) {
             responseMeteo.append(inputLineMeteo);
@@ -124,7 +124,7 @@ public class ResultatMeteo extends HttpServlet {
             }
             inPop.close();
 
-            if (!responsePop.equals("Not Found")) {
+            if (!"Not Found".equals(responsePop.toString())) {
                 population = responsePop.substring(responsePop.indexOf("population") + 12,
                         responsePop.indexOf(",\"nom\""));
             } else {
@@ -164,7 +164,7 @@ public class ResultatMeteo extends HttpServlet {
     }
 
     private static String kelvinToCelcius(String temperature) {
-        Double celcius = (Double.parseDouble(temperature) - 273.15);
+        Double celcius = Double.parseDouble(temperature) - 273.15;
         DecimalFormat f = new DecimalFormat();
         f.setMaximumFractionDigits(2);
         return f.format(celcius);

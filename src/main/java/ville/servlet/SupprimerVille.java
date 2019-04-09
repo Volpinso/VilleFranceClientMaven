@@ -10,14 +10,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.util.EntityUtils;
 
 /**
  * Servlet implementation class EditerVille
@@ -31,7 +29,6 @@ public class SupprimerVille extends HttpServlet {
      */
     public SupprimerVille() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
     /**
@@ -40,7 +37,6 @@ public class SupprimerVille extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // TODO Auto-generated method stub
         response.getWriter().append("Served at: ").append(request.getContextPath());
     }
 
@@ -50,13 +46,10 @@ public class SupprimerVille extends HttpServlet {
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // TODO Auto-generated method stub
         String ville = request.getParameter("idVille");
 
-        int debutDepart = 0;
-        int finDepart = 0;
-        debutDepart = ville.indexOf("codeCommuneInsee=");
-        finDepart = ville.indexOf(", nomCommune=");
+        int debutDepart = ville.indexOf("codeCommuneInsee=");
+        int finDepart = ville.indexOf(", nomCommune=");
 
         if (debutDepart < 0) {
             debutDepart = -2;
@@ -70,12 +63,10 @@ public class SupprimerVille extends HttpServlet {
         arguments.add(new BasicNameValuePair("value", codeCommuneInsee));
         try {
             post.setEntity(new UrlEncodedFormEntity(arguments));
-            HttpResponse response1 = client.execute(post);
+            client.execute(post);
 
-            // Print out the response message
-            System.out.println(EntityUtils.toString(response1.getEntity()));
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new IOException(e);
         }
 
         this.getServletContext().getRequestDispatcher("/UtilisationVille").forward(request, response);
