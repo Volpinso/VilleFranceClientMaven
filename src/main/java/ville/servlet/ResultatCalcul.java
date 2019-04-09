@@ -59,8 +59,8 @@ public class ResultatCalcul extends HttpServlet {
         int debutArrivee = villeArrivee.indexOf("lattitude=");
         int finArrivee = villeArrivee.indexOf(", longitude=");
 
-        if (debutDepart < 0) {
-            debutDepart = -2;
+        if (debutArrivee < 0) {
+            finArrivee = -2;
         }
 
         double villeArriveeLatitude = Double.parseDouble(villeArrivee.substring(debutArrivee + 10, finArrivee));

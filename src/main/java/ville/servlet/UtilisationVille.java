@@ -28,6 +28,7 @@ public class UtilisationVille extends HttpServlet {
      * Default constructor.
      */
     public UtilisationVille() {
+        super();
     }
 
     /**
