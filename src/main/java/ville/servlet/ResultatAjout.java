@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -31,8 +30,8 @@ import ville.bean.VilleBuilder;
 @WebServlet("/ResultatAjout")
 public class ResultatAjout extends HttpServlet {
 
-	private static final long serialVersionUID = 1L;
-       
+    private static final long serialVersionUID = 1L;
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -41,79 +40,81 @@ public class ResultatAjout extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
+    /**
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+     *      response)
+     */
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        // TODO Auto-generated method stub
+        response.getWriter().append("Served at: ").append(request.getContextPath());
+    }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		
-		String codeCommuneInsee = request.getParameter("codeCommuneInsee");
-		
-		String nomCommune = request.getParameter("nomCommune");
-		
-		String codePostal = request.getParameter("codePostal");
-		
-		String libelleAcheminement = request.getParameter("libelleAcheminement");
-		
-		String ligne5 = request.getParameter("ligne5");
-		
-		String latitude = request.getParameter("latitude");
-		
-		String longitude= request.getParameter("longitude");
-		
-		VilleBuilder ville = new VilleBuilder();
-		
-		ville.setCodeCommuneInsee(codeCommuneInsee);
-		ville.setCodePostal(codePostal);
-		ville.setLattitude(latitude);
-		ville.setLibelleAcheminement(libelleAcheminement);
-		ville.setLigne5(ligne5);
-		ville.setLongitude(longitude);
-		ville.setNomCommune(nomCommune);
-		
-		URL url = new URL("http://localhost:8181/villeFranceCompte?value=" + ville.getCodeCommuneInsee());
-		HttpURLConnection con = (HttpURLConnection) url.openConnection();
-		con.setRequestMethod("GET");
-		
-		BufferedReader in = new BufferedReader(
-		        new InputStreamReader(con.getInputStream()));
-		String inputLine;
-		StringBuilder response1 = new StringBuilder();
-		
-		while ((inputLine = in.readLine()) != null) {
-			response1.append(inputLine);
-		}
-		in.close();
-		
-		if ("0".equals(response1.toString())) {
-		
-    		HttpClient client = HttpClientBuilder.create().build();
-    		HttpPost post = new HttpPost("http://localhost:8181/villeFranceAdd");
-    		List<NameValuePair> arguments = new ArrayList<NameValuePair>(1);
-    	    arguments.add(new BasicNameValuePair("value", ville.toString()));
-    	     try {
-    	            post.setEntity(new UrlEncodedFormEntity(arguments));
-    	            client.execute(post);
-    	           
-	        } catch (IOException e) {
-	            throw new IOException(e);
-	        }
-    	     
-    	     HttpSession session = request.getSession();
-    	     session.setAttribute("test", response1.toString());
-    	     this.getServletContext().getRequestDispatcher("/UtilisationVille").forward(request, response);
-		}
-		else {
-			this.getServletContext().getRequestDispatcher("/WEB-INF/erreurAjout.jsp").forward(request, response);
-		}
-	}
+    /**
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+     *      response)
+     */
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        // TODO Auto-generated method stub
+
+        String codeCommuneInsee = request.getParameter("codeCommuneInsee");
+
+        String nomCommune = request.getParameter("nomCommune");
+
+        String codePostal = request.getParameter("codePostal");
+
+        String libelleAcheminement = request.getParameter("libelleAcheminement");
+
+        String ligne5 = request.getParameter("ligne5");
+
+        String latitude = request.getParameter("latitude");
+
+        String longitude = request.getParameter("longitude");
+
+        VilleBuilder ville = new VilleBuilder();
+
+        ville.setCodeCommuneInsee(codeCommuneInsee);
+        ville.setCodePostal(codePostal);
+        ville.setLattitude(latitude);
+        ville.setLibelleAcheminement(libelleAcheminement);
+        ville.setLigne5(ligne5);
+        ville.setLongitude(longitude);
+        ville.setNomCommune(nomCommune);
+
+        URL url = new URL("http://localhost:8181/villeFranceCompte?value=" + ville.getCodeCommuneInsee());
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+        con.setRequestMethod("GET");
+
+        BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+        String inputLine;
+        StringBuilder response1 = new StringBuilder();
+
+        while ((inputLine = in.readLine()) != null) {
+            response1.append(inputLine);
+        }
+        in.close();
+
+        if ("0".equals(response1.toString())) {
+
+            HttpClient client = HttpClientBuilder.create().build();
+            HttpPost post = new HttpPost("http://localhost:8181/villeFranceAdd");
+            List<NameValuePair> arguments = new ArrayList<NameValuePair>(1);
+            arguments.add(new BasicNameValuePair("value", ville.toString()));
+            try {
+                post.setEntity(new UrlEncodedFormEntity(arguments));
+                client.execute(post);
+
+            } catch (IOException e) {
+                throw new IOException(e);
+            }
+
+            HttpSession session = request.getSession();
+            session.setAttribute("test", response1.toString());
+            this.getServletContext().getRequestDispatcher("/UtilisationVille").forward(request, response);
+        } else {
+            this.getServletContext().getRequestDispatcher("/WEB-INF/erreurAjout.jsp").forward(request, response);
+        }
+    }
 
 }

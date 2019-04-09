@@ -13,8 +13,8 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet("/EditerVille")
 public class EditerVille extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
+    private static final long serialVersionUID = 1L;
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -22,69 +22,73 @@ public class EditerVille extends HttpServlet {
         super();
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
+    /**
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+     *      response)
+     */
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.getWriter().append("Served at: ").append(request.getContextPath());
+    }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String ville = request.getParameter("idVille");
-		
-		int debutDepart = ville.indexOf("codeCommuneInsee=");
-		int finDepart = ville.indexOf(", nomCommune=");
-		
-		if(debutDepart < 0) {
-			debutDepart = -2;
-		}
-		
-		String codeCommuneInsee = ville.substring(debutDepart + 17, finDepart);
-		
-		debutDepart = ville.indexOf("nomCommune=");
-		finDepart = ville.indexOf(", codePostal=");
-		
-		String nomCommune = ville.substring(debutDepart + 11, finDepart);
-		
-		debutDepart = ville.indexOf("codePostal=");
-		finDepart = ville.indexOf(", libelleAcheminement=");
-		
-		String codePostal = ville.substring(debutDepart + 11, finDepart);
-		
-		debutDepart = ville.indexOf("libelleAcheminement=");
-		finDepart = ville.indexOf(", ligne5=");
-		
-		String libelleAcheminement = ville.substring(debutDepart + 20, finDepart);
-		
-		debutDepart = ville.indexOf("ligne5=");
-		finDepart = ville.indexOf(", lattitude=");
-		
-		String ligne5 = ville.substring(debutDepart + 7, finDepart);
-		
-		debutDepart = ville.indexOf("lattitude=");
-		finDepart = ville.indexOf(", longitude=");
-		
-		String latitude = ville.substring(debutDepart + 10, finDepart);
-		
-		debutDepart = ville.indexOf("longitude=");
-		finDepart = ville.indexOf("]");
-		
-		String longitude = ville.substring(debutDepart + 10, finDepart);
-		
-		HttpSession session = request.getSession();
-		
-		session.setAttribute("codeCommuneInsee", codeCommuneInsee);
-		session.setAttribute("nomCommune", nomCommune);
-		session.setAttribute("codePostal", codePostal);
-		session.setAttribute("libelleAcheminement", libelleAcheminement);
-		session.setAttribute("ligne5", ligne5);
-		session.setAttribute("latitude", latitude);
-		session.setAttribute("longitude", longitude);
-		
-		this.getServletContext().getRequestDispatcher("/WEB-INF/editerVille.jsp").forward(request, response);
-	}
+    /**
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+     *      response)
+     */
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String ville = request.getParameter("idVille");
+
+        int debutDepart = ville.indexOf("codeCommuneInsee=");
+        int finDepart = ville.indexOf(", nomCommune=");
+
+        if (debutDepart < 0) {
+            debutDepart = -2;
+        }
+
+        String codeCommuneInsee = ville.substring(debutDepart + 17, finDepart);
+
+        debutDepart = ville.indexOf("nomCommune=");
+        finDepart = ville.indexOf(", codePostal=");
+
+        String nomCommune = ville.substring(debutDepart + 11, finDepart);
+
+        debutDepart = ville.indexOf("codePostal=");
+        finDepart = ville.indexOf(", libelleAcheminement=");
+
+        String codePostal = ville.substring(debutDepart + 11, finDepart);
+
+        debutDepart = ville.indexOf("libelleAcheminement=");
+        finDepart = ville.indexOf(", ligne5=");
+
+        String libelleAcheminement = ville.substring(debutDepart + 20, finDepart);
+
+        debutDepart = ville.indexOf("ligne5=");
+        finDepart = ville.indexOf(", lattitude=");
+
+        String ligne5 = ville.substring(debutDepart + 7, finDepart);
+
+        debutDepart = ville.indexOf("lattitude=");
+        finDepart = ville.indexOf(", longitude=");
+
+        String latitude = ville.substring(debutDepart + 10, finDepart);
+
+        debutDepart = ville.indexOf("longitude=");
+        finDepart = ville.indexOf("]");
+
+        String longitude = ville.substring(debutDepart + 10, finDepart);
+
+        HttpSession session = request.getSession();
+
+        session.setAttribute("codeCommuneInsee", codeCommuneInsee);
+        session.setAttribute("nomCommune", nomCommune);
+        session.setAttribute("codePostal", codePostal);
+        session.setAttribute("libelleAcheminement", libelleAcheminement);
+        session.setAttribute("ligne5", ligne5);
+        session.setAttribute("latitude", latitude);
+        session.setAttribute("longitude", longitude);
+
+        this.getServletContext().getRequestDispatcher("/WEB-INF/editerVille.jsp").forward(request, response);
+    }
 
 }

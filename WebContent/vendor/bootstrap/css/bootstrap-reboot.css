@@ -126,13 +126,41 @@ a:hover {
 	text-decoration: underline;
 }
 
-a:not ([href] ):not ([tabindex] ) {
-	color: inherit;
-	text-decoration: none;
-}
+a
+:not
+ 
+(
+[
+href
+]
+ 
+)
+:not
+ 
+(
+[
+tabindex
+]
+ 
+)
+{
+color
+:
+ 
+inherit
+;
 
+	
+text-decoration
+:
+ 
+none
+;
+
+
+}
 a:not ([href] ):not ([tabindex] ):hover, a:not ([href] ):not ([tabindex]
-	):focus {
+	 ):focus {
 	color: inherit;
 	text-decoration: none;
 }
@@ -220,11 +248,56 @@ button, [type="button"], [type="reset"], [type="submit"] {
 	-webkit-appearance: button;
 }
 
-button:not (:disabled ), [type="button"]:not (:disabled ), [type="reset"]:not
-	(:disabled ), [type="submit"]:not (:disabled ) {
-	cursor: pointer;
-}
+button
+:not
+ 
+(
+:disabled
+ 
+),
+[
+type
+=
+"button"
+]
+:not
+ 
+(
+:disabled
+ 
+),
+[
+type
+=
+"reset"
+]
+:not
 
+	
+(
+:disabled
+ 
+),
+[
+type
+=
+"submit"
+]
+:not
+ 
+(
+:disabled
+ 
+)
+{
+cursor
+:
+ 
+pointer
+;
+
+
+}
 button::-moz-focus-inner, [type="button"]::-moz-focus-inner, [type="reset"]::-moz-focus-inner,
 	[type="submit"]::-moz-focus-inner {
 	padding: 0;
