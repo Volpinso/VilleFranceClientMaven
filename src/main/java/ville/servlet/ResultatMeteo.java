@@ -15,6 +15,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+
 import ville.bean.VilleMeteo;
 
 /**
@@ -23,6 +26,7 @@ import ville.bean.VilleMeteo;
 @WebServlet("/ResultatMeteo")
 public class ResultatMeteo extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private static final Logger LOGGER = Logger.getLogger(ResultatMeteo.class.getName());
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -96,7 +100,6 @@ String ville = request.getParameter("idVille");
 		}
 		inMeteo.close();
 		
-		System.out.println(responseMeteo);
 		int debutTemps = 0;
 		int finTemps = 0;
 		int debutTemperature = 0;
@@ -144,7 +147,7 @@ String ville = request.getParameter("idVille");
             }
 		}
 		catch (Exception e) {
-		    
+		    LOGGER.log(Level.WARN, e);
 		}
 		
 		HttpSession session = request.getSession();

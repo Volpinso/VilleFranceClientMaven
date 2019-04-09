@@ -15,14 +15,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.http.HttpResponse;
+
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.util.EntityUtils;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 
 import ville.bean.VilleBuilder;
 
@@ -31,6 +32,8 @@ import ville.bean.VilleBuilder;
  */
 @WebServlet("/ResultatAjout")
 public class ResultatAjout extends HttpServlet {
+    
+    private static final Logger LOGGER = Logger.getLogger(ResultatAjout.class.getName());
 	private static final long serialVersionUID = 1L;
        
     /**
@@ -95,22 +98,21 @@ public class ResultatAjout extends HttpServlet {
 		
 		if (response1.toString().equals("0")) {
 		
-		HttpClient client = HttpClientBuilder.create().build();
-		HttpPost post = new HttpPost("http://localhost:8181/villeFranceAdd");
-		List<NameValuePair> arguments = new ArrayList<NameValuePair>(1);
-	    arguments.add(new BasicNameValuePair("value", ville.toString()));
-	     try {
-	            post.setEntity(new UrlEncodedFormEntity(arguments));
-	            HttpResponse response2 = client.execute(post);
-
-	            // Print out the response message
-	            System.out.println(EntityUtils.toString(response2.getEntity()));
+    		HttpClient client = HttpClientBuilder.create().build();
+    		HttpPost post = new HttpPost("http://localhost:8181/villeFranceAdd");
+    		List<NameValuePair> arguments = new ArrayList<NameValuePair>(1);
+    	    arguments.add(new BasicNameValuePair("value", ville.toString()));
+    	     try {
+    	            post.setEntity(new UrlEncodedFormEntity(arguments));
+    	            client.execute(post);
+    	           
 	        } catch (IOException e) {
-	            e.printStackTrace();
+	            LOGGER.log(Level.WARN, e);
 	        }
-	     HttpSession session = request.getSession();
-	     session.setAttribute("test", response1.toString());
-	     this.getServletContext().getRequestDispatcher("/UtilisationVille").forward(request, response);
+    	     
+    	     HttpSession session = request.getSession();
+    	     session.setAttribute("test", response1.toString());
+    	     this.getServletContext().getRequestDispatcher("/UtilisationVille").forward(request, response);
 		}
 		else {
 			this.getServletContext().getRequestDispatcher("/WEB-INF/erreurAjout.jsp").forward(request, response);
