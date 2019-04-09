@@ -72,6 +72,7 @@ public class SupprimerVille extends HttpServlet {
 	            // Print out the response message
 	            System.out.println(EntityUtils.toString(response1.getEntity()));
 	        } catch (IOException e) {
+	            throw new RuntimeException(e);
 	        }
 		
 		this.getServletContext().getRequestDispatcher("/UtilisationVille").forward(request, response);

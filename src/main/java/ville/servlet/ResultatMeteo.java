@@ -145,6 +145,7 @@ String ville = request.getParameter("idVille");
             }
 		}
 		catch (Exception e) {
+		    throw new RuntimeException(e);
 		}
 		
 		HttpSession session = request.getSession();

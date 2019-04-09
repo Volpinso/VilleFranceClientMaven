@@ -104,6 +104,7 @@ public class ResultatAjout extends HttpServlet {
     	            client.execute(post);
     	           
 	        } catch (IOException e) {
+	            throw new RuntimeException(e);
 	        }
     	     
     	     HttpSession session = request.getSession();
