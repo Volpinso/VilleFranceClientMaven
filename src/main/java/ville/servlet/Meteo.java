@@ -28,7 +28,7 @@ public class Meteo extends HttpServlet {
      * Default constructor.
      */
     public Meteo() {
-        // TODO Auto-generated constructor stub
+        super();
     }
 
     /**
@@ -37,7 +37,6 @@ public class Meteo extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // TODO Auto-generated method stub
         HttpSession session = request.getSession();
         URL url = new URL("http://localhost:8181/villeFrance");
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
@@ -85,7 +84,6 @@ public class Meteo extends HttpServlet {
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // TODO Auto-generated method stub
         doGet(request, response);
     }
 }

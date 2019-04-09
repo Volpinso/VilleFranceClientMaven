@@ -160,16 +160,14 @@ public class ResultatMeteo extends HttpServlet {
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // TODO Auto-generated method stub
         doGet(request, response);
     }
 
-    private String kelvinToCelcius(String temperature) {
+    private static String kelvinToCelcius(String temperature) {
         Double celcius = (Double.parseDouble(temperature) - 273.15);
         DecimalFormat f = new DecimalFormat();
         f.setMaximumFractionDigits(2);
-        String temperatureCelcius = f.format(celcius);
-        return temperatureCelcius;
+        return f.format(celcius);
     }
 
 }
