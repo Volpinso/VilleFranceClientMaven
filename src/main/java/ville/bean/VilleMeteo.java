@@ -91,6 +91,7 @@ public class VilleMeteo {
 		this.temps = temps;
 	}
 	
+	@Override
 	public String toString() {
         return "Ville_France [codeCommuneInsee=" + this.codeCommuneInsee + ", nomCommune=" + this.nomCommune 
         		+ ", codePostal=" + this.codePostal

@@ -1,4 +1,4 @@
-package ville.VilleFranceClientMaven;
+package ville.villefranceclientmaven;
 
 /**
  * Hello world!

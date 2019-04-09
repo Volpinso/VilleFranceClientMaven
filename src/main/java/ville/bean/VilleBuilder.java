@@ -71,7 +71,8 @@ public class VilleBuilder {
 		this.longitude = longitude;
 	}
 	
-	 public String toString() {
+	@Override
+	public String toString() {
 	        return "Ville_France [codeCommuneInsee=" + this.codeCommuneInsee + ", nomCommune=" + this.nomCommune 
 	        		+ ", codePostal=" + this.codePostal
 	                + ", libelleAcheminement=" + this.libelleAcheminement + ", ligne5=" + this.ligne5 
