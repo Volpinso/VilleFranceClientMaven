@@ -31,20 +31,16 @@ public class ResultatMeteo extends HttpServlet {
      */
     public ResultatMeteo() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 String ville = request.getParameter("idVille");
 		
-		int debutDepart = 0;
-		int finDepart = 0;
-		debutDepart = ville.indexOf("codeCommuneInsee=");
-		finDepart = ville.indexOf(", nomCommune=");
+		int debutDepart = ville.indexOf("codeCommuneInsee=");
+		int finDepart = ville.indexOf(", nomCommune=");
 		
 		if(debutDepart < 0) {
 			debutDepart = -2;
@@ -98,19 +94,12 @@ String ville = request.getParameter("idVille");
 		}
 		inMeteo.close();
 		
-		int debutTemps = 0;
-		int finTemps = 0;
-		int debutTemperature = 0;
-		int finTemperature = 0;
-		int debutIcone = 0;
-		int finIcone = 0;
-		
-		debutTemps = responseMeteo.indexOf("weather");
-		finTemps = responseMeteo.indexOf(",\"description\"");
-		debutTemperature = responseMeteo.indexOf("temp\":");
-		finTemperature = responseMeteo.indexOf(",\"pressure");
-		debutIcone = responseMeteo.indexOf("\"weather\":[{");
-		finIcone = responseMeteo.indexOf("],\"base\"");
+		int debutTemps = responseMeteo.indexOf("weather");
+		int finTemps = responseMeteo.indexOf(",\"description\"");
+		int debutTemperature = responseMeteo.indexOf("temp\":");
+		int finTemperature = responseMeteo.indexOf(",\"pressure");
+		int debutIcone = responseMeteo.indexOf("\"weather\":[{");
+		int finIcone = responseMeteo.indexOf("],\"base\"");
 		
 		String temps = responseMeteo.substring(debutTemps + 7, finTemps);
 		temps = temps.substring(temps.indexOf("main\":") + 7, temps.length() - 1);
@@ -131,7 +120,7 @@ String ville = request.getParameter("idVille");
             BufferedReader inPop = new BufferedReader(
                     new InputStreamReader(conPop.getInputStream()));
             String inputLinePop;
-            StringBuffer responsePop = new StringBuffer();
+            StringBuilder responsePop = new StringBuilder();
             
             while ((inputLinePop = inPop.readLine()) != null) {
                 responsePop.append(inputLinePop);
@@ -144,8 +133,8 @@ String ville = request.getParameter("idVille");
                 population = "Inconnu";
             }
 		}
-		catch (Exception e) {
-		    throw new RuntimeException(e);
+		catch (IOException e) {
+		    throw new IOException(e);
 		}
 		
 		HttpSession session = request.getSession();

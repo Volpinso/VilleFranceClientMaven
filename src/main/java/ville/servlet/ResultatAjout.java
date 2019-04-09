@@ -86,14 +86,14 @@ public class ResultatAjout extends HttpServlet {
 		BufferedReader in = new BufferedReader(
 		        new InputStreamReader(con.getInputStream()));
 		String inputLine;
-		StringBuffer response1 = new StringBuffer();
+		StringBuilder response1 = new StringBuilder();
 		
 		while ((inputLine = in.readLine()) != null) {
 			response1.append(inputLine);
 		}
 		in.close();
 		
-		if (response1.toString().equals("0")) {
+		if ("0".equals(response1.toString())) {
 		
     		HttpClient client = HttpClientBuilder.create().build();
     		HttpPost post = new HttpPost("http://localhost:8181/villeFranceAdd");
@@ -104,7 +104,7 @@ public class ResultatAjout extends HttpServlet {
     	            client.execute(post);
     	           
 	        } catch (IOException e) {
-	            throw new RuntimeException(e);
+	            throw new IOException(e);
 	        }
     	     
     	     HttpSession session = request.getSession();

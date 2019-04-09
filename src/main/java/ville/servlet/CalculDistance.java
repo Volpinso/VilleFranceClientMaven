@@ -28,6 +28,7 @@ public class CalculDistance extends HttpServlet {
      * Default constructor. 
      */
     public CalculDistance() {
+        super();
     }
 
 	/**

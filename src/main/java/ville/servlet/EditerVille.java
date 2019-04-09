@@ -20,14 +20,12 @@ public class EditerVille extends HttpServlet {
      */
     public EditerVille() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
@@ -35,13 +33,10 @@ public class EditerVille extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		String ville = request.getParameter("idVille");
 		
-		int debutDepart = 0;
-		int finDepart = 0;
-		debutDepart = ville.indexOf("codeCommuneInsee=");
-		finDepart = ville.indexOf(", nomCommune=");
+		int debutDepart = ville.indexOf("codeCommuneInsee=");
+		int finDepart = ville.indexOf(", nomCommune=");
 		
 		if(debutDepart < 0) {
 			debutDepart = -2;
