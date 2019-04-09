@@ -18,8 +18,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
+
 
 /**
  * Servlet implementation class EditerVille
@@ -27,8 +26,7 @@ import org.apache.log4j.Logger;
 @WebServlet("/SupprimerVille")
 public class SupprimerVille extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final Logger LOGGER = Logger.getLogger(SupprimerVille.class.getName());
-       
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -74,7 +72,6 @@ public class SupprimerVille extends HttpServlet {
 	            // Print out the response message
 	            System.out.println(EntityUtils.toString(response1.getEntity()));
 	        } catch (IOException e) {
-	            LOGGER.log(Level.WARN, e);
 	        }
 		
 		this.getServletContext().getRequestDispatcher("/UtilisationVille").forward(request, response);

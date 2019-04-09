@@ -111,7 +111,6 @@ public class ResultatModification extends HttpServlet {
 	            // Print out the response message
 	            System.out.println(EntityUtils.toString(response1.getEntity()));
 	        } catch (IOException e) {
-	            e.printStackTrace();
 	        }
 
 		this.getServletContext().getRequestDispatcher("/WEB-INF/resultatModification.jsp").forward(request, response);

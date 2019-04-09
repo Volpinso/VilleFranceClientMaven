@@ -28,7 +28,6 @@ public class CalculDistance extends HttpServlet {
      * Default constructor. 
      */
     public CalculDistance() {
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -43,7 +42,7 @@ public class CalculDistance extends HttpServlet {
 		BufferedReader in = new BufferedReader(
 		        new InputStreamReader(con.getInputStream()));
 		String inputLine;
-		StringBuffer response1 = new StringBuffer();
+		StringBuilder response1 = new StringBuilder();
 		
 		while ((inputLine = in.readLine()) != null) {
 			response1.append(inputLine);
@@ -73,7 +72,6 @@ public class CalculDistance extends HttpServlet {
 			villes.add(ville);
 		}
 		
-		System.out.println(response1);
 		session.setAttribute("villeFrance", villes);
 		this.getServletContext().getRequestDispatcher("/WEB-INF/calculDistance.jsp").forward(request, response);
 		

@@ -22,8 +22,6 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicNameValuePair;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
 
 import ville.bean.VilleBuilder;
 
@@ -32,8 +30,7 @@ import ville.bean.VilleBuilder;
  */
 @WebServlet("/ResultatAjout")
 public class ResultatAjout extends HttpServlet {
-    
-    private static final Logger LOGGER = Logger.getLogger(ResultatAjout.class.getName());
+
 	private static final long serialVersionUID = 1L;
        
     /**
@@ -107,7 +104,6 @@ public class ResultatAjout extends HttpServlet {
     	            client.execute(post);
     	           
 	        } catch (IOException e) {
-	            LOGGER.log(Level.WARN, e);
 	        }
     	     
     	     HttpSession session = request.getSession();
