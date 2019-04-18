@@ -85,7 +85,12 @@ public class ResultatCalcul extends HttpServlet {
         HttpSession session = request.getSession();
         session.setAttribute("nomCommuneDepart", nomCommuneDepart);
         session.setAttribute("nomCommuneArrivee", nomCommuneArrivee);
+        session.setAttribute("latDep", villeDepartLatitude);
+        session.setAttribute("lonDep", villeDepartLongitude);
+        session.setAttribute("latArr", villeArriveeLatitude);
+        session.setAttribute("lonArr", villeArriveeLongitude);
         session.setAttribute("distance", f.format(distanceB));
+        session.setAttribute("distanceDouble", distanceB);
         this.getServletContext().getRequestDispatcher("/WEB-INF/resultatCalcul.jsp").forward(request, response);
     }
 

@@ -30,6 +30,15 @@
 
 <!-- Custom styles for this template -->
 <link href="css/clean-blog.min.css" rel="stylesheet">
+<link rel="stylesheet"
+	href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css"
+	integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+	crossorigin="" />
+<style type="text/css">
+#map { /* la carte DOIT avoir une hauteur sinon elle n'apparaît pas */
+	height: 400px;
+}
+</style>
 </head>
 
 <body>
@@ -88,6 +97,8 @@
 			</h2>
 		</div>
 		<br>
+		<div id="map"></div>
+		<br>
 		<div class="col-xs-8 text-center">
 			<a href="CalculDistance" class="btn btn-primary">Retour au calcul
 				de distances</a>
@@ -135,6 +146,49 @@
 
 	<!-- Custom scripts for this template -->
 	<script src="js/clean-blog.min.js"></script>
+	<script>
+    $('#mydata').dataTable();
+    </script>
+	<script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"
+		integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw=="
+		crossorigin=""></script>
+	<script type="text/javascript">
+			// On initialise la latitude et la longitude de Paris (centre de la carte)
+			var lat1 = ${latDep};
+			var lon1 = ${lonDep};
+			var lat2 = ${latArr};
+			var lon2 = ${lonArr};
+			var distance = ${distanceDouble};
+			console.log(distance);
+			var macarte = null;
+			// Fonction d'initialisation de la carte
+			function initMap() {
+				// Créer l'objet "macarte" et l'insèrer dans l'élément HTML qui a l'ID "map"
+				if(distance > 100){
+                	macarte = L.map('map').setView([46.227638, 2.213749], 5);
+				}
+				else if (distance > 50){
+					macarte = L.map('map').setView([lat1, lon1], 8)
+				}
+				else{
+					macarte = L.map('map').setView([lat1, lon1], 10)
+				}
+                // Leaflet ne récupère pas les cartes (tiles) sur un serveur par défaut. Nous devons lui préciser où nous souhaitons les récupérer. Ici, openstreetmap.fr
+                L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
+                    // Il est toujours bien de laisser le lien vers la source des données
+                    attribution: 'données © <a href="//osm.org/copyright">OpenStreetMap</a>/ODbL - rendu <a href="//openstreetmap.fr">OSM France</a>',
+                    minZoom: 1,
+                    maxZoom: 20
+                }).addTo(macarte);
+                var marker = L.marker([lat1, lon1]).addTo(macarte);
+                var marker = L.marker([lat2, lon2]).addTo(macarte);
+            }
+			window.onload = function(){
+				// Fonction d'initialisation qui s'exécute lorsque le DOM est chargé
+				initMap(); 
+			};
+		</script>
+	
 
 </body>
 
